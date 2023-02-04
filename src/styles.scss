@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  #gradient-background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s cubic-bezier(0, 0, 0, 0.94);
+  }
+
+  .card-wrapper {
+    position: relative;
+    width: 600px;
+
+    & .card {
+      width: 300px;
+      height: 500px;
+      transform: perspective(1000px) translate(50%) scale(0.5) rotateY(0deg);
+      transform-origin: 50px center;
+      transition: 1.5s cubic-bezier(0, 0, 0, 0.94);
+
+      & .side {
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: perspective(1000px) rotateY(0);
+        transform-origin: right center;
+        transform-style: preserve-3d;
+        transition: 1.5s cubic-bezier(0, 0, 0, 0.9);
+
+        &.left-side {
+          border-radius: 10px 0 0 10px;
+
+          & .front .heart {
+            & .circle, & .rect {
+              background: #FF5C8A;
+            }
+          }
+        }
+
+        &.right-side {
+          border-radius: 10px 0 0 10px;
+
+          & .front .heart {
+            & .circle, & .rect {
+              background: #F9BEC7;
+            }
+          }
+
+          & .back .heart {
+            & .title {
+              display: none;
+            }
+
+            & .code-wrapper {
+              --widthA: 200px;
+              position: absolute;
+              top: 0;
+              //--widthB: calc(var(--widthA) / 2);
+              //--widthC: calc(var(--widthB) / 2);
+              width: var(--widthA);
+              //top: 133.3333333333px;
+              right: 0;
+              //height: 100px;
+              //margin: auto;
+              //backface-visibility: hidden;
+              transform: rotateY(-180deg);
+
+              & code {
+                //transform: rotateY(-180deg);
+              }
+            }
+          }
+        }
+
+        & .back, & .front {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          backface-visibility: hidden;
+          transition: 0.5s cubic-bezier(0, 0, 0, 0.94);
+          overflow: hidden;
+        }
+
+        & .front {
+          z-index: 2;
+          transform-origin: center;
+
+          & .heart {
+            & .circle, & rect {
+              background: #F9BEC7;
+            }
+          }
+        }
+
+        & .back {
+          transform: rotateY(180deg);
+          overflow: visible;
+
+          & .heart {
+            transform: rotateY(180deg);
+          }
+        }
+
+        & .heart {
+          & .heart-half {
+            transform: rotate(-45deg) scale(0.8) translateX(23%) translateY(10%);
+            transform-origin: 150px 150px;
+            cursor: pointer;
+
+            & .circle {
+              width: 300px;
+              height: 300px;
+              background: #FF5C8A;
+              border-radius: 50%;
+              transition: background 1s cubic-bezier(0, 0, 0, 0.94);
+            }
+
+            & .rect {
+              width: 300px;
+              height: 300px;
+              background: #FF5C8A;
+              margin-top: -150px;
+              transition: background 1s cubic-bezier(0, 0, 0, 0.94);
+            }
+          }
+        }
+      }
+    }
+
+    &.active .card {
+      transform: perspective(1000px) translate(0%) scale(1) rotateY(0);
+
+      & .side {
+        &.right-side {
+          transform: perspective(1000px) rotateY(180deg);
+        }
+      }
+
+      & .left-side .back .heart,
+      & .right-side .back .heart {
+        & .circle, & .rect {
+          background: #FF5C8A;
+        }
+      }
+    }
+
+    &:not(.active) .heart {
+      cursor: pointer;
+    }
+  }
+
+  audio {
+    display: none;
+  }
+}
