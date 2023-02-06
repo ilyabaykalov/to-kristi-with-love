@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: 'Marck Script', cursive;
 }
 
 main {
@@ -69,29 +70,9 @@ main {
             }
           }
 
-
-          & .back .heart {
-            & .title {
-              display: none;
-            }
-
-            & .code-wrapper {
-              --widthA: 200px;
-              position: absolute;
-              top: 0;
-              //--widthB: calc(var(--widthA) / 2);
-              //--widthC: calc(var(--widthB) / 2);
-              width: var(--widthA);
-              //top: 133.3333333333px;
-              right: 0;
-              //height: 100px;
-              //margin: auto;
-              //backface-visibility: hidden;
+          & .text-wrapper {
+            & p {
               transform: rotateY(-180deg);
-
-              & code {
-                //transform: rotateY(-180deg);
-              }
             }
           }
         }
@@ -120,7 +101,6 @@ main {
 
         & .back {
           transform: rotateY(180deg);
-          overflow: visible;
 
           & .heart {
             transform: rotateY(180deg);
@@ -128,9 +108,37 @@ main {
         }
 
         & .heart {
+          & .title {
+            position: absolute;
+            bottom: 20%;
+            left: 15%;
+            font-size: 4em;
+            transform: rotate(45deg);
+            color: #FA356D;
+          }
+
+          & .text-wrapper {
+            position: absolute;
+            top: 6vh;
+            right: 0;
+            width: 450px;
+            text-align: center;
+            color: aliceblue;
+            backface-visibility: hidden;
+            transform: translateX(50%);
+            cursor: default;
+
+            & p:first-child {
+              font-size: 2.7em;
+            }
+
+            & p {
+              font-size: 2.2em;
+            }
+          }
+
           & .heart-half {
-            transform: rotate(-45deg) scale(0.8) translateX(23%) translateY(10%);
-            transform-origin: 150px 150px;
+            transform: rotate(-45deg) translateX(25%) translateY(15%);;
             cursor: pointer;
 
             & .circle {
@@ -153,19 +161,21 @@ main {
       }
     }
 
-    &.active .card {
-      transform: perspective(1000px) translate(0%) scale(1) rotateY(0);
+    &.active {
+      & .card {
+        transform: perspective(1000px) translate(0%) scale(1) rotateY(0);
 
-      & .side {
-        &.right-side {
-          transform: perspective(1000px) rotateY(180deg);
+        & .side {
+          &.right-side {
+            transform: perspective(1000px) rotateY(180deg);
+          }
         }
-      }
 
-      & .left-side .back .heart,
-      & .right-side .back .heart {
-        & .circle, & .rect {
-          background: #FF5C8A;
+        & .left-side .back .heart,
+        & .right-side .back .heart {
+          & .circle, & .rect {
+            background: #FF5C8A;
+          }
         }
       }
     }
