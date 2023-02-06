@@ -57,7 +57,18 @@ main {
             & .circle, & .rect {
               background: #F9BEC7;
             }
+
+            & .circle {
+              border: 3px solid #FF5C8A;
+
+            }
+
+            & .rect {
+              border-left: 3px solid #FF5C8A;
+
+            }
           }
+
 
           & .back .heart {
             & .title {

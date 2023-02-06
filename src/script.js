@@ -12,7 +12,7 @@ const startGradientBackground = () => {
       }
     }
   });
-}
+};
 
 const init = () => {
   const gradient = document.querySelector('#gradient-background');
@@ -37,26 +37,23 @@ const init = () => {
     }
   });
 
-  const motionMatchMedia = window.matchMedia("(prefers-reduced-motion)");
-  const THRESHOLD = 30;
+  const motionMatchMedia = window.matchMedia('(prefers-reduced-motion)');
 
   const handleHover = ({ clientX, clientY, currentTarget }) => {
     const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
 
+    const shift = 30;
+
     const horizontal = (clientX - offsetLeft) / clientWidth;
     const vertical = (clientY - offsetTop) / clientHeight;
-    const rotateX = (THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
-    const rotateY = (vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+    const rotateX = (shift / 2 - horizontal * shift).toFixed(2);
+    const rotateY = (vertical * shift - shift / 2).toFixed(2);
 
-    cardWrapper.style.transform = `perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1, 1, 1)`;
-  }
-
-  const resetStyles = ({currentTarget}) => {
-    cardWrapper.style.transform = `perspective(${currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
-  }
+    cardWrapper.style.transform = `perspective(${ clientWidth }px) rotateX(${ rotateY }deg) rotateY(${ rotateX }deg) scale3d(1, 1, 1)`;
+  };
 
   if (!motionMatchMedia.matches) {
-    cardWrapper.addEventListener("mousemove", handleHover);
-    cardWrapper.addEventListener("mouseleave", resetStyles);
+    cardWrapper.addEventListener('mousemove', handleHover);
+    cardWrapper.removeEventListener('mouseleave', handleHover);
   }
-}
+};
