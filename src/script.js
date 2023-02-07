@@ -135,9 +135,9 @@ const init = () => {
 
     if (audio.src.endsWith(tracks[index]))
       return index !== tracks.length - 1
-        ? `../${ tracks[index + 1] }`
-        : `../${ tracks[index - 1] }`;
-    else return `../${ tracks[index] }`;
+        ? tracks[index + 1]
+        : tracks[index - 1];
+    else return tracks[index];
   };
 
   const onHoverHandler = ({ clientX, clientY }) => {
