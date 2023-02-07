@@ -1,8 +1,6 @@
 .idea
 node_modules
 
-dist
-
 src/*.css
 src/*.css.map
 
