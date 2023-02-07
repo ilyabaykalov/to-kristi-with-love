@@ -5,67 +5,22 @@ class Confetti {
     confettiSpeed: ['slow', 'medium', 'fast'],
     confettiCount: 0,
     confettiLimit: 1000,
-    confettiDestroyTime: 30000,
+    confettiDestroyTime: 1400,
     confettiRenderTime: 60,
     confettiSizeRange: [10, 20]
   };
 
-  constructor(contentContainer = {}) {
-    this.init(contentContainer);
-  }
-
-  init({target}) {
+  constructor({ target } = {}) {
     if (target) {
-      this.confettiContainer = target
-
-      const containerDOM = document.createElement('div');
-
-      this.confettiContainer.appendChild(containerDOM);
-
+      this.confettiContainer = target;
     } else {
-      throw `Для создания экземпляра класса ${this.constructor.name} был использован невалидный DOM-элемент`;
+      throw `Для создания экземпляра класса ${ this.constructor.name } был использован невалидный DOM-элемент`;
     }
   }
 
-  getContainerSize(){
-    return Math.floor(Math.random() * Confetti.SETTINGS.confettiSizeRange[0]) + Confetti.SETTINGS.confettiSizeRange[1] + 'px';
-  }
+  start() {
+    Confetti.SETTINGS.confettiCount = 0;
 
-  getConfettiColor(){
-    return Confetti.SETTINGS.confettiColors[Math.floor(Math.random() * Confetti.SETTINGS.confettiColors.length)];
-  }
-
-  getConfettiSpeed(){
-    return Confetti.SETTINGS.confettiSpeed[Math.floor(Math.random() * Confetti.SETTINGS.confettiSpeed.length)];
-  }
-
-  getConfettiPosition(){
-    return Math.floor(Math.random() * this.confettiContainer.offsetWidth) + 'px';
-  }
-
-  generateConfetti(){
-    const confettiDOM = document.createElement('div'),
-      confettiSize = this.getContainerSize(),
-      confettiBackground = this.getConfettiColor(),
-      confettiLeft = this.getConfettiPosition(),
-      confettiSpeed = this.getConfettiSpeed();
-    let _confettiDOM$classLis, _confettiDOM$classLis2;
-
-    confettiDOM === null || confettiDOM === void 0 ? void 0 : (_confettiDOM$classLis = confettiDOM.classList) === null || _confettiDOM$classLis === void 0 ? void 0 : _confettiDOM$classLis.add('confetti');
-    confettiDOM === null || confettiDOM === void 0 ? void 0 : (_confettiDOM$classLis2 = confettiDOM.classList) === null || _confettiDOM$classLis2 === void 0 ? void 0 : _confettiDOM$classLis2.add('confetti-animation-' + confettiSpeed);
-    confettiDOM.style.left = confettiLeft;
-    confettiDOM.style.width = confettiSize;
-    confettiDOM.style.height = confettiSize;
-    confettiDOM.style.backgroundColor = confettiBackground;
-
-    confettiDOM.removeTimeout = setTimeout(function () {
-      confettiDOM.parentNode.removeChild(confettiDOM);
-    }, Confetti.SETTINGS.confettiDestroyTime);
-
-    this.confettiContainer.appendChild(confettiDOM);
-  }
-
-  renderConfetti(){
     this.confettiInterval = setInterval(() => {
       Confetti.SETTINGS.confettiCount++;
 
@@ -80,13 +35,40 @@ class Confetti {
     }, Confetti.SETTINGS.confettiRenderTime);
   }
 
-  start(){
-    Confetti.SETTINGS.confettiCount = 0;
-
-    this.renderConfetti();
+  stop() {
+    Confetti.SETTINGS.confettiCount = Confetti.SETTINGS.confettiLimit;
   }
 
-  stop(){
-    Confetti.SETTINGS.confettiCount = Confetti.SETTINGS.confettiLimit;
+  generateConfetti() {
+    const confettiDOM = document.createElement('div');
+
+    confettiDOM.style.width = confettiDOM.style.height = this.getSize();
+    confettiDOM.style.backgroundColor = this.getBackgroundColor();
+    confettiDOM.style.left = this.getPosition();
+
+    confettiDOM.classList.add('confetti');
+    confettiDOM.classList.add(`confetti-animation-${ this.getSpeed() }`);
+
+    confettiDOM.removeTimeout = setTimeout(() => {
+      confettiDOM.parentNode.removeChild(confettiDOM);
+    }, Confetti.SETTINGS.confettiDestroyTime);
+
+    this.confettiContainer.appendChild(confettiDOM);
+  }
+
+  getSize() {
+    return Math.floor(Math.random() * Confetti.SETTINGS.confettiSizeRange[0]) + Confetti.SETTINGS.confettiSizeRange[1] + 'px';
+  }
+
+  getBackgroundColor() {
+    return Confetti.SETTINGS.confettiColors[Math.floor(Math.random() * Confetti.SETTINGS.confettiColors.length)];
+  }
+
+  getPosition() {
+    return Math.floor(Math.random() * this.confettiContainer.offsetWidth) + 'px';
+  }
+
+  getSpeed() {
+    return Confetti.SETTINGS.confettiSpeed[Math.floor(Math.random() * Confetti.SETTINGS.confettiSpeed.length)];
   }
 }
