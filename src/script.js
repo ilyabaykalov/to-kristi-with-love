@@ -21,7 +21,9 @@ const init = () => {
 
   startGradientBackground();
 
-  cardWrapper.addEventListener('click', () => {
+  const motionMatchMedia = window.matchMedia('(prefers-reduced-motion)');
+
+  const onClickHandler = () => {
     const isActive = cardWrapper.classList.contains('active');
 
     if (isActive) {
@@ -35,25 +37,34 @@ const init = () => {
       // confetti.start();
       gradient.style.opacity = '1';
     }
-  });
+  };
 
-  const motionMatchMedia = window.matchMedia('(prefers-reduced-motion)');
+  const onHoverHandler = ({ clientX, clientY }) => {
+    const { clientWidth, clientHeight, offsetLeft, offsetTop } = cardWrapper;
 
-  const handleHover = ({ clientX, clientY, currentTarget }) => {
-    const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
-
-    const shift = 30;
+    const shift = 50;
 
     const horizontal = (clientX - offsetLeft) / clientWidth;
     const vertical = (clientY - offsetTop) / clientHeight;
-    const rotateX = (shift / 2 - horizontal * shift).toFixed(2);
-    const rotateY = (vertical * shift - shift / 2).toFixed(2);
+    const rotateX = (vertical * shift - shift / 2).toFixed(2);
+    const rotateY = (shift / 2 - horizontal * shift).toFixed(2);
 
-    cardWrapper.style.transform = `perspective(${ clientWidth }px) rotateX(${ rotateY }deg) rotateY(${ rotateX }deg) scale3d(1, 1, 1)`;
+    cardWrapper.style.transition = `transform 0s`;
+    cardWrapper.style.transform = `perspective(${ clientWidth }px) rotateX(${ rotateX }deg) rotateY(${ rotateY }deg) scale3d(1, 1, 1)`;
   };
 
+  const onResetPerspectiveHandler = ({ currentTarget }) => {
+    cardWrapper.style.transition = `transform 1s`;
+    cardWrapper.style.transform = `perspective(${ currentTarget.clientWidth }px) rotateX(0deg) rotateY(0deg)`;
+  };
+
+  cardWrapper.addEventListener('click', onClickHandler);
+
   if (!motionMatchMedia.matches) {
-    cardWrapper.addEventListener('mousemove', handleHover);
-    cardWrapper.removeEventListener('mouseleave', handleHover);
+    cardWrapper.addEventListener('mousemove', onHoverHandler);
+    cardWrapper.removeEventListener('mouseleave', onHoverHandler);
+
+    cardWrapper.addEventListener('mouseleave', onResetPerspectiveHandler);
+    cardWrapper.removeEventListener('mousemove', onResetPerspectiveHandler);
   }
 };

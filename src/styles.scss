@@ -139,7 +139,6 @@ main {
 
           & .heart-half {
             transform: rotate(-45deg) translateX(25%) translateY(15%);;
-            cursor: pointer;
 
             & .circle {
               width: 300px;
@@ -180,8 +179,10 @@ main {
       }
     }
 
-    &:not(.active) .heart {
-      cursor: pointer;
+    &:not(.active) {
+     & .heart .heart-half {
+        cursor: pointer;
+      }
     }
   }
 
