@@ -121,6 +121,10 @@ main {
             top: 6vh;
             right: 0;
             width: 450px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
             text-align: center;
             color: aliceblue;
             backface-visibility: hidden;
@@ -129,10 +133,13 @@ main {
 
             & p:first-child {
               font-size: 2.7em;
+              opacity: 1;
+              animation: .5s opacifyToggle 4.5s infinite;
             }
 
             & p {
               font-size: 2.2em;
+              margin: 5px auto;
             }
           }
 
@@ -179,7 +186,7 @@ main {
     }
 
     &:not(.active) {
-     & .heart .heart-half {
+      & .heart .heart-half {
         cursor: pointer;
       }
     }
