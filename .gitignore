@@ -1,7 +1,7 @@
 .idea
 node_modules
 
-*.css
-*.css.map
+src/*.css
+src/*.css.map
 
 package-lock.json
