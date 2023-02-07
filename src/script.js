@@ -15,9 +15,11 @@ const startGradientBackground = () => {
 };
 
 const init = () => {
+  const mainContainer = document.querySelector('main');
   const gradient = document.querySelector('#gradient-background');
   const cardWrapper = document.querySelector('.card-wrapper');
   const audio = document.querySelector('audio');
+  const confetti = new Confetti({ target: mainContainer });
 
   startGradientBackground();
 
@@ -29,12 +31,12 @@ const init = () => {
     if (isActive) {
       cardWrapper.classList.remove('active');
       audio.pause();
-      // confetti.stop();
+      confetti.stop();
       gradient.style.opacity = '0';
     } else {
       cardWrapper.classList.add('active');
       audio.play();
-      // confetti.start();
+      confetti.start();
       gradient.style.opacity = '1';
     }
   };
