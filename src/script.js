@@ -14,6 +14,75 @@ const startGradientBackground = () => {
   });
 };
 
+const changeImportantWords = () => {
+  const importantWords = [
+    'Хочу разделить с тобой все самые лучшие моменты жизни!',
+    'Так и быть, можешь не возвращать мое сердце. Дарю!',
+    'Мне так повезло, ведь 50 кг чистого золота на дороге не валяются!',
+    'Оказывается, смешанный цвет глаз называется "хейзел". Так вот, когда я тебя увидел, я охейзел по полной программе!',
+    'Я могу признаться тебе в любви на всех языках... программирования'
+  ];
+
+  const declarations = [
+    'Я люблю тебя',
+    'Ti amo',
+    'I love you',
+    'Je t`aime',
+    'Te quiero'
+  ];
+
+  const importantWordsElements = document.querySelectorAll('.important-words');
+  const declarationOfLoveElements = document.querySelectorAll('.declaration-of-love');
+
+  const getValue = (nodeList, values) => {
+    const index = Math.floor(Math.random() * values.length);
+
+    if (nodeList.item(0).textContent === values[index])
+      return index !== values.length - 1
+        ? values[index + 1]
+        : values[index - 1];
+    else return values[index];
+  };
+
+  const getFontSize = ({ length = 0 }) => {
+      if (length < 55) {
+        return '2.7em'
+      } else if(length < 80) {
+        return '2.3em'
+      } else if(length < 115) {
+        return '2.1em'
+      }
+    };
+
+  const opacityToggle = [
+    { opacity: '1' },
+    { opacity: '0' },
+    { opacity: '0' },
+    { opacity: '1' }
+  ];
+
+  const animationTiming = {
+    delay: 7500,
+    duration: 1000,
+    iterations: 1
+  };
+
+  const phrase = getValue(importantWordsElements, importantWords);
+  const declarationOfLove = getValue(declarationOfLoveElements, declarations);
+
+  for (let i = 0; i < importantWordsElements.length; i++) {
+    importantWordsElements.item(i).textContent = phrase;
+    declarationOfLoveElements.item(i).textContent = declarationOfLove;
+
+    importantWordsElements.item(i).style.fontSize = getFontSize(phrase);
+
+    importantWordsElements.item(i).animate(opacityToggle, animationTiming);
+    declarationOfLoveElements.item(i).animate(opacityToggle, animationTiming);
+  }
+
+  return setTimeout(changeImportantWords, 8000);
+};
+
 const init = () => {
   const mainContainer = document.querySelector('main');
   const cardWrapper = document.querySelector('.card-wrapper');
@@ -24,9 +93,11 @@ const init = () => {
 
   const audio = document.querySelector('#player');
 
+  const motionMatchMedia = window.matchMedia('(prefers-reduced-motion)');
+
   startGradientBackground();
 
-  const motionMatchMedia = window.matchMedia('(prefers-reduced-motion)');
+  changeImportantWords();
 
   const onClickHandler = () => {
     const isActive = cardWrapper.classList.contains('active');
@@ -63,16 +134,16 @@ const init = () => {
     const index = Math.floor(Math.random() * tracks.length);
 
     if (audio.src.endsWith(tracks[index]))
-      return index !== tracks.length
-        ? `../${tracks[index + 1]}`
-        : `../${tracks[index - 1]}`;
-    else return `../${tracks[index]}`;
+      return index !== tracks.length - 1
+        ? `../${ tracks[index + 1] }`
+        : `../${ tracks[index - 1] }`;
+    else return `../${ tracks[index] }`;
   };
 
   const onHoverHandler = ({ clientX, clientY }) => {
     const { clientWidth, clientHeight, offsetLeft, offsetTop } = cardWrapper;
 
-    const shift = 50;
+    const shift = 30;
 
     const horizontal = (clientX - offsetLeft) / clientWidth;
     const vertical = (clientY - offsetTop) / clientHeight;
@@ -98,3 +169,4 @@ const init = () => {
     cardWrapper.removeEventListener('mousemove', onResetPerspectiveHandler);
   }
 };
+
