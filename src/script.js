@@ -16,10 +16,13 @@ const startGradientBackground = () => {
 
 const init = () => {
   const mainContainer = document.querySelector('main');
-  const gradient = document.querySelector('#gradient-background');
   const cardWrapper = document.querySelector('.card-wrapper');
-  const audio = document.querySelector('audio');
+
+  const gradient = document.querySelector('#gradient-background');
+
   const confetti = new Confetti({ target: mainContainer });
+
+  const audio = document.querySelector('#player');
 
   startGradientBackground();
 
@@ -30,15 +33,40 @@ const init = () => {
 
     if (isActive) {
       cardWrapper.classList.remove('active');
+
       audio.pause();
+
       confetti.stop();
+
       gradient.style.opacity = '0';
     } else {
       cardWrapper.classList.add('active');
+
+      audio.src = getRandomTrack();
       audio.play();
+
       confetti.start();
+
       gradient.style.opacity = '1';
     }
+  };
+
+  const getRandomTrack = () => {
+    const tracks = [
+      'audio/sugar.mp3',
+      'audio/we-are-together.mp3',
+      'audio/love-you-like-a-love-song.mp3',
+      'audio/i-just-called.mp3',
+      'audio/this-love.mp3'
+    ];
+
+    const index = Math.floor(Math.random() * tracks.length);
+
+    if (audio.src.endsWith(tracks[index]))
+      return index !== tracks.length
+        ? `../${tracks[index + 1]}`
+        : `../${tracks[index - 1]}`;
+    else return `../${tracks[index]}`;
   };
 
   const onHoverHandler = ({ clientX, clientY }) => {
