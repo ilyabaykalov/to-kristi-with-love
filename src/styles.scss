@@ -137,6 +137,15 @@ main {
               animation: .5s opacifyToggle 4.5s infinite;
             }
 
+            & .date {
+              position: absolute;
+              bottom: 35%;
+              right: 80%;
+              font-size: 1em;
+              transform: rotate(45deg) rotateY(180deg);
+              color: #FAF9F99C;
+            }
+
             & p {
               font-size: 2.2em;
               margin: 5px auto;
