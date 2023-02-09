@@ -4,7 +4,7 @@ class Confetti {
     confettiColors: ['#fce18a', '#ff726d', '#b48def', '#f4306d'],
     confettiSpeed: ['slow', 'medium', 'fast'],
     confettiCount: 0,
-    confettiLimit: 1000,
+    confettiLimit: 10000,
     confettiDestroyTime: 1400,
     confettiRenderTime: 60,
     confettiSizeRange: [10, 20]
