@@ -26,8 +26,7 @@ const getFiles = function (dir, files, srcFolderName, distFolderName) {
       createDirectory(newDistFolderPath);
 
       getFiles(filePath, files, srcFolderName, distFolderName);
-    }
-    else if (!filePath.match(/\.scss|\.css.map/))
+    } else if (!filePath.match(/\.scss|\.css.map/))
       files.push(filePath.replace(`${ srcFolderName }/`, ''));
   }
   return files;
@@ -50,5 +49,13 @@ const build = (srcFolderName = 'src', distFolderName = 'dist') => {
 if (process.env.REBUILD) build();
 
 ghPages.publish('dist', {},
-  () => console.log('Копирование файлов на удаленный репозиторий завершено'))
-.then(() => console.log('Запуск сборки'));
+  (error) => {
+    if (error) console.error(error);
+
+    console.log('Копирование файлов на удаленный репозиторий завершено');
+  })
+.then((error) => {
+  if (error) console.error(error);
+
+  console.log('Запуск сборки');
+});
