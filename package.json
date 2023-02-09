@@ -1,5 +1,22 @@
 {
+  "name": "valentine",
+  "version": "1.0.0",
+  "license": "ISC",
+  "author": {
+    "name": "Ilya Baykalov",
+    "email": "ilyabaykalov@icloud.com",
+    "telegram": "@ilyabaykalov"
+  },
+  "scripts": {
+    "install": "npm install",
+    "clean": "rm package-lock.json && rm -r node_modules && rm -r dist",
+    "build": "node gh-pages.js",
+    "start": "node renamer.js"
+  },
   "dependencies": {
     "granim": "^2.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
