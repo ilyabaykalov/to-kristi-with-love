@@ -38,13 +38,11 @@ const changeImportantWords = () => {
   const declarationOfLoveElements = document.querySelectorAll('.declaration-of-love');
 
   const getValue = (nodeList, values) => {
-    const index = Math.floor(Math.random() * values.length);
+    const index = values.indexOf(nodeList.item(0).textContent);
 
-    if (nodeList.item(0).textContent === values[index])
-      return index !== values.length - 1
-        ? values[index + 1]
-        : values[index - 1];
-    else return values[index];
+    if (index === values.length - 1)
+      return values[0]
+    else return values[index + 1];
   };
 
   const getFontSize = ({ length = 0 }) => {
