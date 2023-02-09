@@ -1,0 +1,196 @@
+body {
+  margin: 0;
+  font-family: "Marck Script", cursive;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+main #gradient-background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0, 0, 0, 0.94);
+}
+main .card-wrapper {
+  position: relative;
+  width: 600px;
+}
+main .card-wrapper .card {
+  width: 300px;
+  height: 500px;
+  transform: perspective(1000px) translate(50%) scale(0.5) rotateY(0deg);
+  transform-origin: 50px center;
+  transition: 1.5s cubic-bezier(0, 0, 0, 0.94);
+}
+main .card-wrapper .card .side {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: perspective(1000px) rotateY(0);
+  transform-origin: right center;
+  transform-style: preserve-3d;
+  transition: 1.5s cubic-bezier(0, 0, 0, 0.9);
+}
+main .card-wrapper .card .side.left-side {
+  border-radius: 10px 0 0 10px;
+}
+main .card-wrapper .card .side.left-side .front .heart .circle, main .card-wrapper .card .side.left-side .front .heart .rect {
+  background: #FF5C8A;
+}
+main .card-wrapper .card .side.right-side {
+  border-radius: 10px 0 0 10px;
+}
+main .card-wrapper .card .side.right-side .front .heart .circle, main .card-wrapper .card .side.right-side .front .heart .rect {
+  background: #F9BEC7;
+}
+main .card-wrapper .card .side.right-side .front .heart .circle {
+  border: 3px solid #FF5C8A;
+}
+main .card-wrapper .card .side.right-side .front .heart .rect {
+  border-left: 3px solid #FF5C8A;
+}
+main .card-wrapper .card .side.right-side .text-wrapper p {
+  transform: rotateY(-180deg);
+}
+main .card-wrapper .card .side .back, main .card-wrapper .card .side .front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backface-visibility: hidden;
+  transition: 0.5s cubic-bezier(0, 0, 0, 0.94);
+  overflow: hidden;
+}
+main .card-wrapper .card .side .front {
+  z-index: 2;
+  transform-origin: center;
+}
+main .card-wrapper .card .side .front .heart .circle, main .card-wrapper .card .side .front .heart rect {
+  background: #F9BEC7;
+}
+main .card-wrapper .card .side .back {
+  transform: rotateY(180deg);
+}
+main .card-wrapper .card .side .back .heart {
+  transform: rotateY(180deg);
+}
+main .card-wrapper .card .side .heart .title {
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  font-size: 4em;
+  transform: rotate(45deg);
+  color: #FA356D;
+}
+main .card-wrapper .card .side .heart .text-wrapper {
+  position: absolute;
+  top: 6vh;
+  right: 0;
+  width: 450px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  color: aliceblue;
+  backface-visibility: hidden;
+  transform: translateX(50%);
+  cursor: default;
+}
+main .card-wrapper .card .side .heart .text-wrapper .important-words {
+  font-size: 2.7em;
+  opacity: 1;
+  animation: 0.5s opacifyToggle 4.5s infinite;
+}
+main .card-wrapper .card .side .heart .text-wrapper .date {
+  position: absolute;
+  bottom: 35%;
+  right: 80%;
+  font-size: 1em;
+  transform: rotate(45deg) rotateY(180deg);
+  color: rgba(250, 249, 249, 0.6117647059);
+}
+main .card-wrapper .card .side .heart .text-wrapper p {
+  font-size: 2.2em;
+  margin: 5px auto;
+}
+main .card-wrapper .card .side .heart .heart-half {
+  transform: rotate(-45deg) translateX(25%) translateY(15%);
+}
+main .card-wrapper .card .side .heart .heart-half .circle {
+  width: 300px;
+  height: 300px;
+  background: #FF5C8A;
+  border-radius: 50%;
+  transition: background 1s cubic-bezier(0, 0, 0, 0.94);
+}
+main .card-wrapper .card .side .heart .heart-half .rect {
+  width: 300px;
+  height: 300px;
+  background: #FF5C8A;
+  margin-top: -150px;
+  transition: background 1s cubic-bezier(0, 0, 0, 0.94);
+}
+main .card-wrapper.active .card {
+  transform: perspective(1000px) translate(0%) scale(1) rotateY(0);
+}
+main .card-wrapper.active .card .side.right-side {
+  transform: perspective(1000px) rotateY(180deg);
+}
+main .card-wrapper.active .card .left-side .back .heart .circle, main .card-wrapper.active .card .left-side .back .heart .rect, main .card-wrapper.active .card .right-side .back .heart .circle, main .card-wrapper.active .card .right-side .back .heart .rect {
+  background: #FF5C8A;
+}
+main .card-wrapper:not(.active) .heart .heart-half {
+  cursor: pointer;
+}
+main audio {
+  display: none;
+}
+main .confetti {
+  position: absolute;
+  top: 0;
+}
+main .confetti-animation-slow {
+  animation: confetti-slow 2.5s linear 1 forwards;
+}
+main .confetti-animation-medium {
+  animation: confetti-medium 2s linear 1 forwards;
+}
+main .confetti-animation-fast {
+  animation: confetti-fast 1.5s linear 1 forwards;
+}
+@keyframes confetti-slow {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(25px, 105vh, 0) rotateX(360deg) rotateY(180deg);
+  }
+}
+@keyframes confetti-medium {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg);
+  }
+}
+@keyframes confetti-fast {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
