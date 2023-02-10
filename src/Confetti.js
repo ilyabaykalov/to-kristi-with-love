@@ -12,7 +12,7 @@ class Confetti {
 
   constructor({ target } = {}) {
     if (target) {
-      this.confettiContainer = target;
+      this._confettiContainer = target;
     } else {
       throw `Для создания экземпляра класса ${ this.constructor.name } был использован невалидный DOM-элемент`;
     }
@@ -21,16 +21,16 @@ class Confetti {
   start() {
     Confetti.SETTINGS.confettiCount = 0;
 
-    this.confettiInterval = setInterval(() => {
+    const confettiInterval = setInterval(() => {
       Confetti.SETTINGS.confettiCount++;
 
       if (Confetti.SETTINGS.confettiCount > Confetti.SETTINGS.confettiLimit) {
 
-        clearInterval(this.confettiInterval);
+        clearInterval(confettiInterval);
 
         return false;
       } else {
-        this.generateConfetti();
+        this.#generateConfetti();
       }
     }, Confetti.SETTINGS.confettiRenderTime);
   }
@@ -39,36 +39,36 @@ class Confetti {
     Confetti.SETTINGS.confettiCount = Confetti.SETTINGS.confettiLimit;
   }
 
-  generateConfetti() {
+  #generateConfetti() {
     const confettiDOM = document.createElement('div');
 
-    confettiDOM.style.width = confettiDOM.style.height = this.getSize();
-    confettiDOM.style.backgroundColor = this.getBackgroundColor();
-    confettiDOM.style.left = this.getPosition();
+    confettiDOM.style.width = confettiDOM.style.height = this.#getSize();
+    confettiDOM.style.backgroundColor = this.#getBackgroundColor();
+    confettiDOM.style.left = this.#getPosition();
 
     confettiDOM.classList.add('confetti');
-    confettiDOM.classList.add(`confetti-animation-${ this.getSpeed() }`);
+    confettiDOM.classList.add(`confetti-animation-${ this.#getSpeed() }`);
 
     confettiDOM.removeTimeout = setTimeout(() => {
       confettiDOM.parentNode.removeChild(confettiDOM);
     }, Confetti.SETTINGS.confettiDestroyTime);
 
-    this.confettiContainer.appendChild(confettiDOM);
+    this._confettiContainer.appendChild(confettiDOM);
   }
 
-  getSize() {
+  #getSize() {
     return Math.floor(Math.random() * Confetti.SETTINGS.confettiSizeRange[0]) + Confetti.SETTINGS.confettiSizeRange[1] + 'px';
   }
 
-  getBackgroundColor() {
+  #getBackgroundColor() {
     return Confetti.SETTINGS.confettiColors[Math.floor(Math.random() * Confetti.SETTINGS.confettiColors.length)];
   }
 
-  getPosition() {
-    return Math.floor(Math.random() * this.confettiContainer.offsetWidth) + 'px';
+  #getPosition() {
+    return Math.floor(Math.random() * this._confettiContainer.offsetWidth) + 'px';
   }
 
-  getSpeed() {
+  #getSpeed() {
     return Confetti.SETTINGS.confettiSpeed[Math.floor(Math.random() * Confetti.SETTINGS.confettiSpeed.length)];
   }
 }
