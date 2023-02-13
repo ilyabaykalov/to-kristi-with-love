@@ -173,13 +173,13 @@ main .confetti-animation-fast {
   animation: confetti-fast 1.5s linear 1 forwards;
 }
 main .confetti-animation-slow-mobile {
-  animation: confetti-slow 2.5s linear 1 forwards;
+  animation: confetti-slow-mobile 2.5s linear 1 forwards;
 }
 main .confetti-animation-medium-mobile {
-  animation: confetti-medium 2s linear 1 forwards;
+  animation: confetti-medium-mobile 2s linear 1 forwards;
 }
 main .confetti-animation-fast-mobile {
-  animation: confetti-fast 1.5s linear 1 forwards;
+  animation: confetti-fast-mobile 1.5s linear 1 forwards;
 }
 @keyframes confetti-slow {
   0% {
