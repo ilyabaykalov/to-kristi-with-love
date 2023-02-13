@@ -172,6 +172,15 @@ main .confetti-animation-medium {
 main .confetti-animation-fast {
   animation: confetti-fast 1.5s linear 1 forwards;
 }
+main .confetti-animation-slow-mobile {
+  animation: confetti-slow 2.5s linear 1 forwards;
+}
+main .confetti-animation-medium-mobile {
+  animation: confetti-medium 2s linear 1 forwards;
+}
+main .confetti-animation-fast-mobile {
+  animation: confetti-fast 1.5s linear 1 forwards;
+}
 @keyframes confetti-slow {
   0% {
     transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
@@ -189,6 +198,30 @@ main .confetti-animation-fast {
   }
 }
 @keyframes confetti-fast {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
+  }
+}
+@keyframes confetti-slow-mobile {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(25px, 105vh, 0);
+  }
+}
+@keyframes confetti-medium-mobile {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+  100% {
+    transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg);
+  }
+}
+@keyframes confetti-fast-mobile {
   0% {
     transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
   }

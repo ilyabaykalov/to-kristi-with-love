@@ -46,8 +46,10 @@ class Confetti {
     confettiDOM.style.backgroundColor = this.#getBackgroundColor();
     confettiDOM.style.left = this.#getPosition();
 
+    const isMobile = checkDeviceType() ? '' : '-mobile';
+
     confettiDOM.classList.add('confetti');
-    confettiDOM.classList.add(`confetti-animation-${ this.#getSpeed() }`);
+    confettiDOM.classList.add(`confetti-animation-${ this.#getSpeed() }${isMobile}`);
 
     confettiDOM.removeTimeout = setTimeout(() => {
       confettiDOM.parentNode.removeChild(confettiDOM);
