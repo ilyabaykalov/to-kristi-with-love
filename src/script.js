@@ -84,6 +84,12 @@ const changeImportantWords = () => {
   return setTimeout(changeImportantWords, 8000);
 };
 
+const checkDeviceType = () => {
+  const deviceTypes = /Android|webOS|iPhone/i;
+
+  return !deviceTypes.test(navigator.userAgent);
+};
+
 const init = () => {
   const mainContainer = document.querySelector('main');
   const cardWrapper = document.querySelector('.card-wrapper');
@@ -162,7 +168,7 @@ const init = () => {
 
   cardWrapper.addEventListener('click', onClickHandler);
 
-  if (!motionMatchMedia.matches) {
+  if (!motionMatchMedia.matches && checkDeviceType()) {
     cardWrapper.addEventListener('mousemove', onHoverHandler);
     cardWrapper.removeEventListener('mouseleave', onHoverHandler);
 

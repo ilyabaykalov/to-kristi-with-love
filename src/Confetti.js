@@ -46,8 +46,10 @@ class Confetti {
     confettiDOM.style.backgroundColor = this.#getBackgroundColor();
     confettiDOM.style.left = this.#getPosition();
 
+    const isMobile = checkDeviceType() ? '' : '-mobile';
+
     confettiDOM.classList.add('confetti');
-    confettiDOM.classList.add(`confetti-animation-${ this.#getSpeed() }`);
+    confettiDOM.classList.add(`confetti-animation-${ this.#getSpeed() }${isMobile}`);
 
     confettiDOM.removeTimeout = setTimeout(() => {
       confettiDOM.parentNode.removeChild(confettiDOM);
@@ -65,7 +67,7 @@ class Confetti {
   }
 
   #getPosition() {
-    return Math.floor(Math.random() * this._confettiContainer.offsetWidth) + 'px';
+    return Math.floor(Math.random() * (this._confettiContainer.offsetWidth * 0.9)) + 'px';
   }
 
   #getSpeed() {

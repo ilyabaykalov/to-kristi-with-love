@@ -20,9 +20,10 @@ main {
   .card-wrapper {
     position: relative;
     width: 600px;
+    z-index: 1;
 
     & .card {
-      width: 300px;
+      width: 50%;
       height: 500px;
       transform: perspective(1000px) translate(50%) scale(0.5) rotateY(0deg);
       transform-origin: 50px center;
@@ -103,6 +104,10 @@ main {
 
           & .heart {
             transform: rotateY(180deg);
+
+            & .text-wrapper {
+              top: 11%;
+            }
           }
         }
 
@@ -118,7 +123,7 @@ main {
 
           & .text-wrapper {
             position: absolute;
-            top: 6vh;
+            top: 10%;
             right: 0;
             width: 450px;
             height: 400px;
@@ -221,6 +226,18 @@ main {
       animation: confetti-fast 1.5s linear 1 forwards;
     }
 
+    &-animation-slow-mobile {
+      animation: confetti-slow-mobile 2.5s linear 1 forwards;
+    }
+
+    &-animation-medium-mobile {
+      animation: confetti-medium-mobile 2s linear 1 forwards;
+    }
+
+    &-animation-fast-mobile {
+      animation: confetti-fast-mobile 1.5s linear 1 forwards;
+    }
+
     @keyframes confetti-slow {
       0% {
         transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
@@ -247,5 +264,33 @@ main {
         transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
       }
     }
+
+    @keyframes confetti-slow-mobile {
+      0% {
+        transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+      }
+      100% {
+        transform: translate3d(25px, 105vh, 0);
+      }
+    }
+
+    @keyframes confetti-medium-mobile {
+      0% {
+        transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+      }
+      100% {
+        transform: translate3d(100px, 105vh, 0);
+      }
+    }
+
+    @keyframes confetti-fast-mobile {
+      0% {
+        transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+      }
+      100% {
+        transform: translate3d(-50px, 105vh, 0);
+      }
+    }
+
   }
 }
