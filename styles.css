@@ -193,7 +193,7 @@ main .confetti-animation-fast {
     transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
   }
   100% {
-    transform: translate3d(-50px, 105vh, 0);
+    transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
   }
 }
 @media only screen and (min-width: 1000px) {
