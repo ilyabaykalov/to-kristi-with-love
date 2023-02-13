@@ -22,7 +22,7 @@ main .card-wrapper {
   z-index: 1;
 }
 main .card-wrapper .card {
-  width: 300px;
+  width: 50%;
   height: 500px;
   transform: perspective(1000px) translate(50%) scale(0.5) rotateY(0deg);
   transform-origin: 50px center;
@@ -84,6 +84,9 @@ main .card-wrapper .card .side .back {
 main .card-wrapper .card .side .back .heart {
   transform: rotateY(180deg);
 }
+main .card-wrapper .card .side .back .heart .text-wrapper {
+  top: 11%;
+}
 main .card-wrapper .card .side .heart .title {
   position: absolute;
   bottom: 20%;
@@ -94,7 +97,7 @@ main .card-wrapper .card .side .heart .title {
 }
 main .card-wrapper .card .side .heart .text-wrapper {
   position: absolute;
-  top: 6vh;
+  top: 10%;
   right: 0;
   width: 450px;
   height: 400px;
