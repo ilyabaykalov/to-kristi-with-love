@@ -65,7 +65,7 @@ class Confetti {
   }
 
   #getPosition() {
-    return Math.floor(Math.random() * this._confettiContainer.offsetWidth - 100) + 'px';
+    return Math.floor(Math.random() * (this._confettiContainer.offsetWidth * 0.9)) + 'px';
   }
 
   #getSpeed() {
