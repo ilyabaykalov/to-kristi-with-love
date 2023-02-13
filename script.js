@@ -162,12 +162,12 @@ const init = () => {
 
   cardWrapper.addEventListener('click', onClickHandler);
 
-  if (!motionMatchMedia.matches) {
-    cardWrapper.addEventListener('mousemove', onHoverHandler);
-    cardWrapper.removeEventListener('mouseleave', onHoverHandler);
-
-    cardWrapper.addEventListener('mouseleave', onResetPerspectiveHandler);
-    cardWrapper.removeEventListener('mousemove', onResetPerspectiveHandler);
-  }
+  // if (!motionMatchMedia.matches) {
+  //   cardWrapper.addEventListener('mousemove', onHoverHandler);
+  //   cardWrapper.removeEventListener('mouseleave', onHoverHandler);
+  //
+  //   cardWrapper.addEventListener('mouseleave', onResetPerspectiveHandler);
+  //   cardWrapper.removeEventListener('mousemove', onResetPerspectiveHandler);
+  // }
 };
 
