@@ -90,7 +90,7 @@ const init = () => {
 
   const gradient = document.querySelector('#gradient-background');
 
-  const confetti = new Confetti({ target: mainContainer });
+  // const confetti = new Confetti({ target: mainContainer });
 
   const audio = document.querySelector('#player');
 
@@ -108,7 +108,7 @@ const init = () => {
 
       audio.pause();
 
-      confetti.stop();
+      // confetti.stop();
 
       gradient.style.opacity = '0';
     } else {
@@ -117,7 +117,7 @@ const init = () => {
       audio.src = getRandomTrack();
       audio.play();
 
-      confetti.start();
+      // confetti.start();
 
       gradient.style.opacity = '1';
     }
