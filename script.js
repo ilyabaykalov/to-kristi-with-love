@@ -123,9 +123,8 @@ const init = () => {
       audio.src = getRandomTrack();
       audio.play();
 
-      if (checkDeviceType()) {
+      // if (checkDeviceType())
         confetti.start();
-      }
 
       gradient.style.opacity = '1';
     }
