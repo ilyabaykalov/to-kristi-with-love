@@ -19,6 +19,7 @@ main #gradient-background {
 main .card-wrapper {
   position: relative;
   width: 600px;
+  z-index: 1;
 }
 main .card-wrapper .card {
   width: 300px;
